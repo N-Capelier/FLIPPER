@@ -12,11 +12,15 @@ public class ItemBuilder : MonoBehaviour
 
     [Header("Timings")]
     [Range(1f, 20f)]
-    [SerializeField] float itemSpawnTimer = 5f;
+    [SerializeField] float itemSpawnTime = 5f;
+    [Range(0f, 1f)]
+    [SerializeField] float decreaseRate = 0.1f;
+    [Range(0f, 20f)]
+    [SerializeField] float cooldownLimit = 2f;
 
     private void Awake()
     {
-        itemTimer = new Clock(itemSpawnTimer);
+        itemTimer = new Clock(itemSpawnTime);
     }
 
     private void Update()
@@ -24,7 +28,11 @@ public class ItemBuilder : MonoBehaviour
         if (itemTimer.onFinish)
         {
             SpawnItem();
-            itemTimer.SetTime(1 / (itemSpawnTimer * WorldManager.Instance.difficulty));
+            if(itemSpawnTime > cooldownLimit)
+            {
+                itemSpawnTime -= decreaseRate * WorldManager.Instance.difficulty;
+            }
+            itemTimer.SetTime(itemSpawnTime);
         }
     }
 

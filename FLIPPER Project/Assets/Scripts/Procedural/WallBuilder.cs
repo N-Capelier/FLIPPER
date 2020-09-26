@@ -12,11 +12,15 @@ public class WallBuilder : MonoBehaviour
 
     [Header("Timings")]
     [Range(1f, 20f)]
-    [SerializeField] float wallSpawnTimer = 5f;
+    [SerializeField] float wallSpawnCooldown = 5f;
+    [Range(0f, 1f)]
+    [SerializeField] float decreaseRate = 0.1f;
+    [Range(0f, 20f)]
+    [SerializeField] float cooldownLimit = 2f;
 
     private void Awake()
     {
-        wallTimer = new Clock(wallSpawnTimer);
+        wallTimer = new Clock(wallSpawnCooldown);
     }
 
     private void Update()
@@ -24,7 +28,12 @@ public class WallBuilder : MonoBehaviour
         if(wallTimer.onFinish)
         {
             SpawnWall();
-            wallTimer.SetTime(1/(wallSpawnTimer * WorldManager.Instance.difficulty));
+            if (wallSpawnCooldown > cooldownLimit)
+            {
+                wallSpawnCooldown -= decreaseRate * WorldManager.Instance.difficulty;
+
+            }
+            wallTimer.SetTime(wallSpawnCooldown);
         }
     }
 
