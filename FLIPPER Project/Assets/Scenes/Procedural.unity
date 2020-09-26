@@ -172,7 +172,7 @@ MonoBehaviour:
   mapBuilder: {fileID: 1586674793}
   itemBuilder: {fileID: 2010838769}
   wallBuilder: {fileID: 1023732900}
-  difficultyMultiplicator: 1.2
+  difficultyMultiplicator: 1.12
   difficultyUpStartingTime: 10
   difficulty: 1
   isLevelDesignSymetrical: 0
@@ -200,7 +200,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 84057415}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -3.475, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2010838770}
@@ -292,7 +292,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 586144304}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 3.44, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2010838770}
@@ -322,7 +322,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 893638495}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1.747, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2010838770}
@@ -357,10 +357,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eefd3a0dac01be54685815c54dc3975e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftSpawnPoints: []
-  rightSpawnPoints: []
-  walls: []
-  wallSpawnTimer: 5
+  leftSpawnPoints:
+  - {fileID: 84057416}
+  - {fileID: 1714501427}
+  - {fileID: 893638496}
+  rightSpawnPoints:
+  - {fileID: 2122075365}
+  - {fileID: 1109994258}
+  - {fileID: 586144305}
+  walls:
+  - {fileID: 5429260935490695726, guid: 4314393e7ea345344b51409812eeacee, type: 3}
+  wallSpawnCooldown: 5
+  decreaseRate: 0.04
+  cooldownLimit: 2
 --- !u!4 &1023732901
 Transform:
   m_ObjectHideFlags: 0
@@ -399,7 +408,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1109994257}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 2.6, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2010838770}
@@ -540,7 +549,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1714501426}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -2.574, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2010838770}
@@ -658,10 +667,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ab892e455e5e5b46a6833c6ba2c8640, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftSpawnPoints: []
-  rightSpawnPoints: []
-  items: []
-  itemSpawnTimer: 5
+  leftSpawnPoints:
+  - {fileID: 84057416}
+  - {fileID: 1714501427}
+  - {fileID: 893638496}
+  rightSpawnPoints:
+  - {fileID: 2122075365}
+  - {fileID: 1109994258}
+  - {fileID: 586144305}
+  items:
+  - {fileID: 6094255072761669231, guid: a75b4823547250549a52ac3c63abdad0, type: 3}
+  itemSpawnTime: 5
+  decreaseRate: 0.04
+  cooldownLimit: 2
 --- !u!4 &2010838770
 Transform:
   m_ObjectHideFlags: 0
@@ -706,7 +724,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2122075364}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.8, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2010838770}

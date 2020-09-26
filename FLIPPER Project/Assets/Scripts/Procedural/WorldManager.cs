@@ -10,13 +10,13 @@ public class WorldManager : Singleton<WorldManager>
     public WallBuilder wallBuilder = null;
 
     [Header("Difficulty")]
+    [Range(1f, 2f)]
     public float difficultyMultiplicator = 1f;
     [Range(1f, 30f)]
     public float difficultyUpStartingTime = 10f;
 
     [HideInInspector] public float difficulty = 1f;
     Clock difficultyTimer = null;
-    [Range(1f, 2f)]
 
     [Header("Tests")]
     public bool isLevelDesignSymetrical = false;
