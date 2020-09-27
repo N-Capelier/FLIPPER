@@ -8,6 +8,8 @@ public class WallBuilder : MonoBehaviour
 
     public Transform[] leftSpawnPoints = null;
     public Transform[] rightSpawnPoints = null;
+    public Transform[] mergedSpawnPoints = null;
+
     public GameObject[] walls = null;
 
     [Header("Timings")]
@@ -25,13 +27,12 @@ public class WallBuilder : MonoBehaviour
 
     private void Update()
     {
-        if(wallTimer.onFinish)
+        if (wallTimer.onFinish)
         {
             SpawnWall();
             if (wallSpawnCooldown > cooldownLimit)
             {
                 wallSpawnCooldown -= decreaseRate * WorldManager.Instance.difficulty;
-
             }
             wallTimer.SetTime(wallSpawnCooldown);
         }
@@ -39,6 +40,12 @@ public class WallBuilder : MonoBehaviour
 
     void SpawnWall()
     {
+        if (WorldManager.Instance.isMerged)
+        {
+            SpawnWallMerged();
+            return;
+        }
+
         if (WorldManager.Instance.isLevelDesignSymetrical)
         {
             int spawnPointIndex = Random.Range(0, leftSpawnPoints.Length);
@@ -58,5 +65,13 @@ public class WallBuilder : MonoBehaviour
             Instantiate(walls[leftWallIndex], leftSpawnPoints[leftSpawnPointIndex]);
             Instantiate(walls[rightWallIndex], rightSpawnPoints[rightSpawnPointIndex]);
         }
+    }
+
+    void SpawnWallMerged()
+    {
+        int spawnPointIndex = Random.Range(0, mergedSpawnPoints.Length);
+        int wallIndex = Random.Range(0, walls.Length);
+
+        Instantiate(walls[wallIndex], mergedSpawnPoints[spawnPointIndex]);
     }
 }

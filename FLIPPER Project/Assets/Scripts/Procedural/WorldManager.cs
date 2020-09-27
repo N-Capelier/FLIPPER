@@ -8,6 +8,8 @@ public class WorldManager : Singleton<WorldManager>
     public ItemBuilder itemBuilder = null;
     public WallBuilder wallBuilder = null;
 
+    [HideInInspector] public bool isMerged = false;
+
     [Header("Difficulty")]
     [Range(1f, 2f)]
     public float difficultyMultiplicator = 1f;
@@ -33,6 +35,14 @@ public class WorldManager : Singleton<WorldManager>
             print("Difficulty UP !");
             difficulty *= difficultyMultiplicator;
             difficultyTimer.SetTime(difficultyUpStartingTime);
+        }
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            if (isMerged)
+                isMerged = false;
+            else
+                isMerged = true;
         }
     }
 }

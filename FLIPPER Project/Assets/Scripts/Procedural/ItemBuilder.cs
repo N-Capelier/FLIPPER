@@ -8,6 +8,7 @@ public class ItemBuilder : MonoBehaviour
 
     public Transform[] leftSpawnPoints = null;
     public Transform[] rightSpawnPoints = null;
+    public Transform[] mergedSpawnPoints = null;
     public GameObject[] items = null;
 
     [Header("Timings")]
@@ -28,7 +29,7 @@ public class ItemBuilder : MonoBehaviour
         if (itemTimer.onFinish)
         {
             SpawnItem();
-            if(itemSpawnTime > cooldownLimit)
+            if (itemSpawnTime > cooldownLimit)
             {
                 itemSpawnTime -= decreaseRate * WorldManager.Instance.difficulty;
             }
@@ -38,6 +39,12 @@ public class ItemBuilder : MonoBehaviour
 
     void SpawnItem()
     {
+        if (WorldManager.Instance.isMerged)
+        {
+            SpawnItemMerged();
+            return;
+        }
+
         if (WorldManager.Instance.isLevelDesignSymetrical)
         {
             int spawnPointIndex = Random.Range(0, leftSpawnPoints.Length);
@@ -57,5 +64,13 @@ public class ItemBuilder : MonoBehaviour
             Instantiate(items[leftItemIndex], leftSpawnPoints[leftSpawnPointIndex]);
             Instantiate(items[rightItemIndex], rightSpawnPoints[rightSpawnPointIndex]);
         }
+    }
+
+    void SpawnItemMerged()
+    {
+        int spawnPointIndex = Random.Range(0, mergedSpawnPoints.Length);
+        int itemIdex = Random.Range(0, items.Length);
+
+        Instantiate(items[itemIdex], mergedSpawnPoints[spawnPointIndex]);
     }
 }
