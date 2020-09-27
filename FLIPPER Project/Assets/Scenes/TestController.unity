@@ -213,22 +213,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4286072834874210889, guid: b6c4747438ee2ca428d136d90166728e, type: 3}
-      propertyPath: m_Offset.x
-      value: -0.014471948
-      objectReference: {fileID: 0}
-    - target: {fileID: 4286072834874210889, guid: b6c4747438ee2ca428d136d90166728e, type: 3}
-      propertyPath: m_Size.x
-      value: 0.5002334
-      objectReference: {fileID: 0}
-    - target: {fileID: 4286072834874210889, guid: b6c4747438ee2ca428d136d90166728e, type: 3}
-      propertyPath: m_Offset.y
-      value: 0.24521434
-      objectReference: {fileID: 0}
-    - target: {fileID: 4286072834874210889, guid: b6c4747438ee2ca428d136d90166728e, type: 3}
-      propertyPath: m_Size.y
-      value: 0.92246556
-      objectReference: {fileID: 0}
     - target: {fileID: 4286072834874210890, guid: b6c4747438ee2ca428d136d90166728e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -271,10 +255,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4286072834874210890, guid: b6c4747438ee2ca428d136d90166728e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4286072834874210893, guid: b6c4747438ee2ca428d136d90166728e, type: 3}
-      propertyPath: breakControlType
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4286072834874210902, guid: b6c4747438ee2ca428d136d90166728e, type: 3}
@@ -334,9 +314,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4941864840617962182, guid: 8b1c8cf16fc5d364b9222c32e9a488e4, type: 3}
+      propertyPath: canStraff
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4941864840617962182, guid: 8b1c8cf16fc5d364b9222c32e9a488e4, type: 3}
+      propertyPath: straffForce
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4941864840617962182, guid: 8b1c8cf16fc5d364b9222c32e9a488e4, type: 3}
+      propertyPath: straffCooldown
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4941864840617962205, guid: 8b1c8cf16fc5d364b9222c32e9a488e4, type: 3}
       propertyPath: m_Name
       value: CarsJ2
       objectReference: {fileID: 0}
+    - target: {fileID: 9218366420845347120, guid: 8b1c8cf16fc5d364b9222c32e9a488e4, type: 3}
+      propertyPath: echoGO
+      value: 
+      objectReference: {fileID: 1040651498713588197, guid: 79b5c7c31e3d89a48aad7d5d0664b3e8, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b1c8cf16fc5d364b9222c32e9a488e4, type: 3}
