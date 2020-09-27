@@ -85,6 +85,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: CarsJ2
       objectReference: {fileID: 0}
+    - target: {fileID: 8998423930167684907, guid: b6c4747438ee2ca428d136d90166728e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8998423930167684907, guid: b6c4747438ee2ca428d136d90166728e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8998423930167684907, guid: b6c4747438ee2ca428d136d90166728e, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6c4747438ee2ca428d136d90166728e, type: 3}
 --- !u!1 &4941864840617962205 stripped
