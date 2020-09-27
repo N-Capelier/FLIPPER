@@ -21,6 +21,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3192035037422810579, guid: b6c4747438ee2ca428d136d90166728e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -10
+      objectReference: {fileID: 0}
     - target: {fileID: 4286072834874210890, guid: b6c4747438ee2ca428d136d90166728e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -80,6 +84,18 @@ PrefabInstance:
     - target: {fileID: 4286072834874210902, guid: b6c4747438ee2ca428d136d90166728e, type: 3}
       propertyPath: m_Name
       value: CarsJ2 Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 8998423930167684907, guid: b6c4747438ee2ca428d136d90166728e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8998423930167684907, guid: b6c4747438ee2ca428d136d90166728e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8998423930167684907, guid: b6c4747438ee2ca428d136d90166728e, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6c4747438ee2ca428d136d90166728e, type: 3}
