@@ -5,7 +5,6 @@ using UnityEngine;
 public class WorldManager : Singleton<WorldManager>
 {
     [Header("Manager")]
-    public MapBuilder mapBuilder = null;
     public ItemBuilder itemBuilder = null;
     public WallBuilder wallBuilder = null;
 
