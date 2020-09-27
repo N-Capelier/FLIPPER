@@ -20,6 +20,8 @@ public class WallBuilder : MonoBehaviour
     [Range(0f, 20f)]
     [SerializeField] float cooldownLimit = 2f;
 
+    int luckRate = 2;
+
     private void Awake()
     {
         wallTimer = new Clock(wallSpawnCooldown);
@@ -53,6 +55,17 @@ public class WallBuilder : MonoBehaviour
 
             Instantiate(walls[wallIndex], leftSpawnPoints[spawnPointIndex]);
             Instantiate(walls[wallIndex], rightSpawnPoints[spawnPointIndex]);
+
+            int luck = Random.Range(0, luckRate);
+            if (luck == 0)
+            {
+                int luckSpawnPointIndex = Random.Range(0, leftSpawnPoints.Length);
+                if (luckSpawnPointIndex != spawnPointIndex)
+                {
+                    Instantiate(walls[wallIndex], leftSpawnPoints[luckSpawnPointIndex]);
+                    Instantiate(walls[wallIndex], rightSpawnPoints[luckSpawnPointIndex]);
+                }
+            }
         }
         else
         {
@@ -64,6 +77,22 @@ public class WallBuilder : MonoBehaviour
 
             Instantiate(walls[leftWallIndex], leftSpawnPoints[leftSpawnPointIndex]);
             Instantiate(walls[rightWallIndex], rightSpawnPoints[rightSpawnPointIndex]);
+
+            int luck = Random.Range(0, luckRate);
+            if (luck == 0)
+            {
+                int luckLeftSpawnPointIndex = Random.Range(0, leftSpawnPoints.Length);
+                int luckRightSpawnPointIndex = Random.Range(0, leftSpawnPoints.Length);
+
+                if (luckLeftSpawnPointIndex != leftSpawnPointIndex)
+                {
+                    Instantiate(walls[leftWallIndex], leftSpawnPoints[luckLeftSpawnPointIndex]);
+                }
+                if (luckRightSpawnPointIndex != rightSpawnPointIndex)
+                {
+                    Instantiate(walls[rightWallIndex], rightSpawnPoints[luckRightSpawnPointIndex]);
+                }
+            }
         }
     }
 
@@ -73,5 +102,15 @@ public class WallBuilder : MonoBehaviour
         int wallIndex = Random.Range(0, walls.Length);
 
         Instantiate(walls[wallIndex], mergedSpawnPoints[spawnPointIndex]);
+
+        int luck = Random.Range(0, luckRate);
+        if (luck == 0)
+        {
+            int luckSpawnPointIndex = Random.Range(0, leftSpawnPoints.Length);
+            if (luckSpawnPointIndex != spawnPointIndex)
+            {
+                Instantiate(walls[wallIndex], mergedSpawnPoints[luckSpawnPointIndex]);
+            }
+        }
     }
 }

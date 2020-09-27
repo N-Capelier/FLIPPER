@@ -19,6 +19,8 @@ public class ItemBuilder : MonoBehaviour
     [Range(0f, 20f)]
     [SerializeField] float cooldownLimit = 2f;
 
+    int luckRate = 2;
+
     private void Awake()
     {
         itemTimer = new Clock(itemSpawnTime);
@@ -48,10 +50,21 @@ public class ItemBuilder : MonoBehaviour
         if (WorldManager.Instance.isLevelDesignSymetrical)
         {
             int spawnPointIndex = Random.Range(0, leftSpawnPoints.Length);
-            int itemIdex = Random.Range(0, items.Length);
+            int itemIndex = Random.Range(0, items.Length);
 
-            Instantiate(items[itemIdex], leftSpawnPoints[spawnPointIndex]);
-            Instantiate(items[itemIdex], rightSpawnPoints[spawnPointIndex]);
+            Instantiate(items[itemIndex], leftSpawnPoints[spawnPointIndex]);
+            Instantiate(items[itemIndex], rightSpawnPoints[spawnPointIndex]);
+
+            int luck = Random.Range(0, luckRate);
+            if(luck == 0)
+            {
+                int luckSpawnPointIndex = Random.Range(0, leftSpawnPoints.Length);
+                if(luckSpawnPointIndex != spawnPointIndex)
+                {
+                    Instantiate(items[itemIndex], leftSpawnPoints[luckSpawnPointIndex]);
+                    Instantiate(items[itemIndex], rightSpawnPoints[luckSpawnPointIndex]);
+                }
+            }
         }
         else
         {
@@ -63,14 +76,40 @@ public class ItemBuilder : MonoBehaviour
 
             Instantiate(items[leftItemIndex], leftSpawnPoints[leftSpawnPointIndex]);
             Instantiate(items[rightItemIndex], rightSpawnPoints[rightSpawnPointIndex]);
+
+            int luck = Random.Range(0, luckRate);
+            if (luck == 0)
+            {
+                int luckLeftSpawnPointIndex = Random.Range(0, leftSpawnPoints.Length);
+                int luckRightSpawnPointIndex = Random.Range(0, leftSpawnPoints.Length);
+
+                if(luckLeftSpawnPointIndex != leftSpawnPointIndex)
+                {
+                    Instantiate(items[leftItemIndex], leftSpawnPoints[luckLeftSpawnPointIndex]);
+                }
+                if(luckRightSpawnPointIndex != rightSpawnPointIndex)
+                {
+                    Instantiate(items[rightItemIndex], rightSpawnPoints[luckRightSpawnPointIndex]);
+                }
+            }
         }
     }
 
     void SpawnItemMerged()
     {
         int spawnPointIndex = Random.Range(0, mergedSpawnPoints.Length);
-        int itemIdex = Random.Range(0, items.Length);
+        int itemIndex = Random.Range(0, items.Length);
 
-        Instantiate(items[itemIdex], mergedSpawnPoints[spawnPointIndex]);
+        Instantiate(items[itemIndex], mergedSpawnPoints[spawnPointIndex]);
+
+        int luck = Random.Range(0, luckRate);
+        if (luck == 0)
+        {
+            int luckSpawnPointIndex = Random.Range(0, leftSpawnPoints.Length);
+            if (luckSpawnPointIndex != spawnPointIndex)
+            {
+                Instantiate(items[itemIndex], mergedSpawnPoints[luckSpawnPointIndex]);
+            }
+        }
     }
 }
