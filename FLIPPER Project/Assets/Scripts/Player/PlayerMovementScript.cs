@@ -4,39 +4,50 @@ using UnityEngine;
 
 public class PlayerMovementScript : MonoBehaviour
 {
-    //States
+    [Header("States")]
     public bool isPlayer1;
     public bool isAlive = true;
     private string inputKey = "_1";
-    
-    //Movement
+
+    [Header("Movement")]
     [SerializeField] private float horizontalForce = 10f;
+    private float maxRotation = 15f;
+    public float rotationSpeed = 10f;
     [SerializeField] private float turboForce = 15f;
     [SerializeField] private float breakForce = 10f;
+    [SerializeField] private float straffForce = 0f;
+    [SerializeField] private float straffCooldown = 0f;
 
-    //Fuel
+    [Header("Fuel")]
     public float turboFuel;
     [SerializeField] private float maxFuelValue = 100f;
     [SerializeField] private float fuelDecayTickSpeed = 0.1f;
     [SerializeField] private float fuelDecayValue = 0.5f;
+    [SerializeField] private float straffFuelCost = 10f;
     private float y = 0f;
 
-    //Restrictions
+    [Header("Restriction")]
     public bool canMoveHorizontal;
     public bool canTurbo;
     public bool canBreak;
+    public bool canStraff;
 
-    //Debug
+    [Header("Debug")]
     [SerializeField] [Range(0, 1)] private int breakControlType = 0;
     public bool isTurbo;
     public bool isBreak;
+    public bool isStraffLeft;
+    public bool isStaffRight;
+    public bool isStraffing;
 
-    //Components
+    [Header("Components")]
     [HideInInspector] public Rigidbody2D playerRb;
+    [HideInInspector] public TrailRenderer playerTrail;
 
     private void Awake()
     {
         playerRb = GetComponent<Rigidbody2D>();
+        playerTrail = GetComponent<TrailRenderer>();
 
         //Pour get les bons input
         if (isPlayer1)
@@ -48,6 +59,7 @@ public class PlayerMovementScript : MonoBehaviour
     private void Update()
     {
         GetInput();
+        TrailManager();
     }
 
     /// <summary>
@@ -62,6 +74,8 @@ public class PlayerMovementScript : MonoBehaviour
         {
             playerRb.AddForce(new Vector2(horizontal, 0).normalized * horizontalForce, ForceMode2D.Force);
         }
+
+        CarRotation(horizontal);
 
         //Turbo
         isTurbo = Input.GetButton("AButton" + inputKey);
@@ -86,6 +100,15 @@ public class PlayerMovementScript : MonoBehaviour
 
         if (isBreak && canBreak && !isTurbo)
             Break();
+
+        //Straff
+        isStraffLeft = Input.GetButtonDown("LeftBumper" + inputKey);
+        isStaffRight = Input.GetButtonDown("RightBumper" + inputKey);
+
+        if ((isStaffRight || isStraffLeft) && !isStraffing && canStraff && turboFuel > 0)
+        {
+            StartCoroutine(Straff());
+        }
     }
 
     /// <summary>
@@ -133,6 +156,86 @@ public class PlayerMovementScript : MonoBehaviour
         {
             turboFuel = maxFuelValue;
         }
+    }
+
+    /// <summary>
+    /// Tilt la voiture quand tu tourne
+    /// </summary>
+    public void CarRotation(float horizontal)
+    {
+        float angle = 0f;
+
+        if (horizontal == 0)
+        {
+            angle = Mathf.LerpAngle(transform.eulerAngles.z, 0f, rotationSpeed * Time.deltaTime);
+        }
+        else if(horizontal > 0)
+        {
+            angle = Mathf.LerpAngle(transform.eulerAngles.z, -maxRotation, rotationSpeed * Time.deltaTime);
+        }
+        else if(horizontal < 0)
+        {
+            angle = Mathf.LerpAngle(transform.eulerAngles.z, maxRotation, rotationSpeed * Time.deltaTime);
+        }
+        
+        transform.eulerAngles = new Vector3(0f, 0f, angle);
+    }
+
+    /// <summary>
+    /// Applique les changements sur le trail
+    /// </summary>
+    private void TrailManager()
+    {
+        //Impact du frein sur la trail 
+        if (!isBreak || !isStraffing)
+        {
+            playerTrail.emitting = true;
+        }
+        else
+        {
+            playerTrail.emitting = false;
+        }
+
+        //Impact du turbo sur la trail
+        if (!isTurbo)
+        {
+            playerTrail.widthMultiplier = 0.3f;
+        }
+        else
+        {
+            playerTrail.widthMultiplier = 0.5f;
+        }
+    }
+
+    private IEnumerator Straff()
+    {
+        isStraffing = true;
+        turboFuel -= straffFuelCost;
+        GetComponent<EchoScript>().canEcho = true;
+
+        canMoveHorizontal = false;
+        canTurbo = false;
+        canBreak = false;
+
+        playerRb.velocity = Vector2.zero;
+
+        if (isStraffLeft && !isStaffRight)
+        {
+            playerRb.AddForce(Vector2.left * straffForce, ForceMode2D.Impulse);
+        }
+        else if  (isStaffRight && !isStraffLeft)
+        {
+            playerRb.AddForce(Vector2.right * straffForce, ForceMode2D.Impulse);
+        }
+
+        yield return new WaitForSecondsRealtime(straffCooldown);
+
+        GetComponent<EchoScript>().canEcho = false;
+        canMoveHorizontal = true;
+        canTurbo = true;
+        canBreak = true;
+
+        isStraffing = false;
     }
 
 }
