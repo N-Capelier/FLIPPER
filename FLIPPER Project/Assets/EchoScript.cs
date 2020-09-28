@@ -19,7 +19,7 @@ public class EchoScript : MonoBehaviour
             {
                 //spawn echo game object
                 GameObject echoInstance = Instantiate(echoGO, transform.position, Quaternion.identity);
-                Destroy(echoInstance, 3f);
+                Destroy(echoInstance, 1f);
                 timeBtwSpawn = startTimeBtwSpawn;
             }
             else

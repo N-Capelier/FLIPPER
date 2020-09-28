@@ -14,7 +14,8 @@ public class AlternativePlayerBounce : MonoBehaviour
 
     [Header("Dev Requierement")]
 
-    [SerializeField] Rigidbody2D carRgb = null;
+    [SerializeField] private Rigidbody2D carRgb = null;
+    [SerializeField] private float otherCarVelocity;
     private PlayerMovementScript playerMovementScript;
 
     //Layer infos:
@@ -25,6 +26,7 @@ public class AlternativePlayerBounce : MonoBehaviour
     {
         playerMask = LayerMask.NameToLayer("Player");
         playerMovementScript = GetComponent<PlayerMovementScript>();
+        carRgb = GetComponent<Rigidbody2D>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -32,7 +34,10 @@ public class AlternativePlayerBounce : MonoBehaviour
         if(collision.gameObject.layer == playerMask)
         {
             Debug.Log("player collision");
-            carRgb.AddForce((gameObject.transform.position - collision.gameObject.transform.position).normalized * bounceStrength);
+
+            otherCarVelocity = collision.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude / 4;
+
+            carRgb.AddForce((gameObject.transform.position - collision.gameObject.transform.position).normalized * bounceStrength * otherCarVelocity);
 
             StartCoroutine(hitStun());
         }

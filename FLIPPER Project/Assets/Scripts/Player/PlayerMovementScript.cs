@@ -17,6 +17,8 @@ public class PlayerMovementScript : MonoBehaviour
     [SerializeField] private float breakForce = 10f;
     [SerializeField] private float straffForce = 0f;
     [SerializeField] private float straffCooldown = 0f;
+    [SerializeField] private float straffMass = 0f;
+
 
     [Header("Fuel")]
     public float turboFuel;
@@ -34,6 +36,7 @@ public class PlayerMovementScript : MonoBehaviour
 
     [Header("Debug")]
     [SerializeField] [Range(0, 1)] private int breakControlType = 0;
+    [SerializeField] private bool infiniteFuel = false;
     public bool isTurbo;
     public bool isBreak;
     public bool isStraffLeft;
@@ -141,7 +144,9 @@ public class PlayerMovementScript : MonoBehaviour
     /// </summary>
     private void FuelConsomption()
     {
-        turboFuel -= fuelDecayValue;
+
+        if(!infiniteFuel)
+            turboFuel -= fuelDecayValue;
     }
 
     /// <summary>
@@ -187,7 +192,7 @@ public class PlayerMovementScript : MonoBehaviour
     private void TrailManager()
     {
         //Impact du frein sur la trail 
-        if (!isBreak || !isStraffing)
+        if (!isBreak && !isStraffing)
         {
             playerTrail.emitting = true;
         }
@@ -207,11 +212,19 @@ public class PlayerMovementScript : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Tout ce qui concerne la méca de Straff
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator Straff()
     {
         isStraffing = true;
-        turboFuel -= straffFuelCost;
+
+        if (!infiniteFuel)
+            turboFuel -= straffFuelCost;
+
         GetComponent<EchoScript>().canEcho = true;
+        playerRb.mass = straffMass;
 
         canMoveHorizontal = false;
         canTurbo = false;
@@ -231,6 +244,8 @@ public class PlayerMovementScript : MonoBehaviour
         yield return new WaitForSecondsRealtime(straffCooldown);
 
         GetComponent<EchoScript>().canEcho = false;
+        playerRb.mass = 1f;
+
         canMoveHorizontal = true;
         canTurbo = true;
         canBreak = true;
