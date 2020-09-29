@@ -9,16 +9,25 @@ public class PlayerMovementScript : MonoBehaviour
     public bool isAlive = true;
     private string inputKey = "_1";
 
-    [Header("Movement")]
+    [Header("Horizontal Movement")]
     [SerializeField] private float horizontalForce = 10f;
     private float maxRotation = 15f;
     public float rotationSpeed = 10f;
+
+    [Header("Turbo")]
     [SerializeField] private float turboForce = 15f;
+    [SerializeField] private AnimationCurve turboCurve;
+    [SerializeField] private float timeSinceTurbo = 0f;
+
+    [Header("Break")]
     [SerializeField] private float breakForce = 10f;
+    private float baseLinearDrag;
+    [SerializeField] private float breakLinearDrag = 0f;
+
+    [Header("Straff")]
     [SerializeField] private float straffForce = 0f;
     [SerializeField] private float straffCooldown = 0f;
     [SerializeField] private float straffMass = 0f;
-
 
     [Header("Fuel")]
     public float turboFuel;
@@ -49,8 +58,11 @@ public class PlayerMovementScript : MonoBehaviour
 
     private void Awake()
     {
+        //Get les components
         playerRb = GetComponent<Rigidbody2D>();
+        baseLinearDrag = playerRb.drag;
         playerTrail = GetComponent<TrailRenderer>();
+
 
         //Pour get les bons input
         if (isPlayer1)
@@ -59,10 +71,13 @@ public class PlayerMovementScript : MonoBehaviour
             inputKey = "_2";
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         GetInput();
         TrailManager();
+
+        if (infiniteFuel && turboFuel <= 0)
+            turboFuel = maxFuelValue;
     }
 
     /// <summary>
@@ -84,7 +99,15 @@ public class PlayerMovementScript : MonoBehaviour
         isTurbo = Input.GetButton("AButton" + inputKey);
 
         if (isTurbo && canTurbo && turboFuel > 0 && !isBreak)
+        {
             Turbo();
+            timeSinceTurbo += Time.fixedDeltaTime;
+        }
+        else
+        {
+            timeSinceTurbo = 0f;
+        }
+            
 
         //Break
         if (breakControlType == 0)
@@ -102,7 +125,11 @@ public class PlayerMovementScript : MonoBehaviour
         }
 
         if (isBreak && canBreak && !isTurbo)
+        {
             Break();
+            playerRb.drag = breakLinearDrag;
+        }
+        else playerRb.drag = baseLinearDrag;
 
         //Straff
         isStraffLeft = Input.GetButtonDown("LeftBumper" + inputKey);
@@ -119,7 +146,7 @@ public class PlayerMovementScript : MonoBehaviour
     /// </summary>
     private void Turbo()
     {
-        playerRb.AddForce(Vector2.up * turboForce, ForceMode2D.Force);
+        playerRb.AddForce(Vector2.up * turboForce /** turboCurve.Evaluate(timeSinceTurbo)*/, ForceMode2D.Force);
 
         if (y < fuelDecayTickSpeed)
             y += Time.fixedDeltaTime;
@@ -144,9 +171,7 @@ public class PlayerMovementScript : MonoBehaviour
     /// </summary>
     private void FuelConsomption()
     {
-
-        if(!infiniteFuel)
-            turboFuel -= fuelDecayValue;
+        turboFuel -= fuelDecayValue;
     }
 
     /// <summary>
@@ -220,8 +245,7 @@ public class PlayerMovementScript : MonoBehaviour
     {
         isStraffing = true;
 
-        if (!infiniteFuel)
-            turboFuel -= straffFuelCost;
+        turboFuel -= straffFuelCost;
 
         GetComponent<EchoScript>().canEcho = true;
         playerRb.mass = straffMass;
@@ -235,10 +259,12 @@ public class PlayerMovementScript : MonoBehaviour
         if (isStraffLeft && !isStaffRight)
         {
             playerRb.AddForce(Vector2.left * straffForce, ForceMode2D.Impulse);
+            transform.eulerAngles = new Vector3(0f, 0f, maxRotation);
         }
         else if  (isStaffRight && !isStraffLeft)
         {
             playerRb.AddForce(Vector2.right * straffForce, ForceMode2D.Impulse);
+            transform.eulerAngles = new Vector3(0f, 0f, -maxRotation);
         }
 
         yield return new WaitForSecondsRealtime(straffCooldown);

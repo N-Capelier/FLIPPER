@@ -37,6 +37,11 @@ public class AlternativePlayerBounce : MonoBehaviour
 
             otherCarVelocity = collision.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude / 4;
 
+            if(otherCarVelocity <= 0.25f)
+            {
+                otherCarVelocity = 0.25f;
+            }
+
             carRgb.AddForce((gameObject.transform.position - collision.gameObject.transform.position).normalized * bounceStrength * otherCarVelocity);
 
             StartCoroutine(hitStun());

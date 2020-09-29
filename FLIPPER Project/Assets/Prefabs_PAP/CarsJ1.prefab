@@ -246,13 +246,57 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPlayer1: 1
   isAlive: 1
-  horizontalForce: 15
+  horizontalForce: 50
   rotationSpeed: 8
-  turboForce: 20
-  breakForce: 15
+  turboForce: 100
+  turboCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.0000027967617
+      value: 0.99998856
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.30818176
+      value: 0.8990727
+      inSlope: -1.0584944
+      outSlope: -1.0584944
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.40559036
+      outWeight: 0.08515856
+    - serializedVersion: 3
+      time: 0.7085235
+      value: 0.5986831
+      inSlope: -0.64333344
+      outSlope: -0.64333344
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.57444423
+      outWeight: 0.24952231
+    - serializedVersion: 3
+      time: 1
+      value: 0.49764252
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  timeSinceTurbo: 0
+  breakForce: 50
+  breakLinearDrag: 5
   straffForce: 50
-  straffCooldown: 0.3
-  straffMass: 2
+  straffCooldown: 0.25
+  straffMass: 4
   turboFuel: 100
   maxFuelValue: 100
   fuelDecayTickSpeed: 0.1
@@ -263,7 +307,7 @@ MonoBehaviour:
   canBreak: 1
   canStraff: 1
   breakControlType: 0
-  infiniteFuel: 0
+  infiniteFuel: 1
   isTurbo: 0
   isBreak: 0
   isStraffLeft: 0
