@@ -16,8 +16,8 @@ public class PlayerMovementScript : MonoBehaviour
 
     [Header("Turbo")]
     [SerializeField] private float turboForce = 15f;
-    [SerializeField] private AnimationCurve turboCurve;
-    [SerializeField] private float timeSinceTurbo = 0f;
+    private float timeSinceTurbo = 0f;
+    [SerializeField] private float turboStartForce = 0f;
 
     [Header("Break")]
     [SerializeField] private float breakForce = 10f;
@@ -87,6 +87,7 @@ public class PlayerMovementScript : MonoBehaviour
     {
         //Déplacement Horizontal
         float horizontal = Input.GetAxisRaw("LeftJoystickHorizontal" + inputKey);
+        Debug.Log(horizontal);
 
         if (horizontal != 0 && canMoveHorizontal)
         {
@@ -101,6 +102,7 @@ public class PlayerMovementScript : MonoBehaviour
         if (isTurbo && canTurbo && turboFuel > 0 && !isBreak)
         {
             Turbo();
+
             timeSinceTurbo += Time.fixedDeltaTime;
         }
         else
@@ -146,7 +148,12 @@ public class PlayerMovementScript : MonoBehaviour
     /// </summary>
     private void Turbo()
     {
-        playerRb.AddForce(Vector2.up * turboForce /** turboCurve.Evaluate(timeSinceTurbo)*/, ForceMode2D.Force);
+        if(timeSinceTurbo == 0)
+        {
+            playerRb.AddForce(Vector2.up * turboStartForce, ForceMode2D.Impulse);
+        }
+
+        playerRb.AddForce(Vector2.up * turboForce, ForceMode2D.Force);
 
         if (y < fuelDecayTickSpeed)
             y += Time.fixedDeltaTime;
