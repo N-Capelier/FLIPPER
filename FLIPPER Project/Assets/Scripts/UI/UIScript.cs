@@ -12,7 +12,7 @@ public class UIScript : MonoBehaviour
 
     void Start()
     {
-        plMoveScript = GetComponent<PlayerMovementScript>();
+        plMoveScript = GetComponentInParent<PlayerMovementScript>();
     }
 
     // Update is called once per frame
