@@ -33,8 +33,6 @@ public class AlternativePlayerBounce : MonoBehaviour
     {
         if(collision.gameObject.layer == playerMask)
         {
-            Debug.Log("player collision");
-
             otherCarVelocity = collision.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude / 4;
 
             if(otherCarVelocity <= 0.25f)

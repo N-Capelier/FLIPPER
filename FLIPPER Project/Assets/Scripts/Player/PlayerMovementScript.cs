@@ -18,6 +18,7 @@ public class PlayerMovementScript : MonoBehaviour
     [SerializeField] private float turboForce = 15f;
     private float timeSinceTurbo = 0f;
     [SerializeField] private float turboStartForce = 0f;
+    [SerializeField] private float turboCooldown;
 
     [Header("Break")]
     [SerializeField] private float breakForce = 10f;
@@ -47,6 +48,7 @@ public class PlayerMovementScript : MonoBehaviour
     [SerializeField] [Range(0, 1)] private int breakControlType = 0;
     [SerializeField] private bool infiniteFuel = false;
     public bool isTurbo;
+    public bool asReleaseTurbo = false;
     public bool isBreak;
     public bool isStraffLeft;
     public bool isStaffRight;
@@ -61,7 +63,7 @@ public class PlayerMovementScript : MonoBehaviour
         //Get les components
         playerRb = GetComponent<Rigidbody2D>();
         baseLinearDrag = playerRb.drag;
-        playerTrail = GetComponent<TrailRenderer>();
+        playerTrail = GetComponentInChildren<TrailRenderer>();
 
 
         //Pour get les bons input
@@ -87,7 +89,6 @@ public class PlayerMovementScript : MonoBehaviour
     {
         //Déplacement Horizontal
         float horizontal = Input.GetAxisRaw("LeftJoystickHorizontal" + inputKey);
-        Debug.Log(horizontal);
 
         if (horizontal != 0 && canMoveHorizontal)
         {
@@ -98,6 +99,10 @@ public class PlayerMovementScript : MonoBehaviour
 
         //Turbo
         isTurbo = Input.GetButton("AButton" + inputKey);
+        asReleaseTurbo = Input.GetButtonUp("AButton" + inputKey);
+
+        if (asReleaseTurbo && canTurbo)
+            StartCoroutine(TurboAntiSpam());
 
         if (isTurbo && canTurbo && turboFuel > 0 && !isBreak)
         {
@@ -109,7 +114,7 @@ public class PlayerMovementScript : MonoBehaviour
         {
             timeSinceTurbo = 0f;
         }
-            
+
 
         //Break
         if (breakControlType == 0)
@@ -224,7 +229,7 @@ public class PlayerMovementScript : MonoBehaviour
     private void TrailManager()
     {
         //Impact du frein sur la trail 
-        if (!isBreak && !isStraffing)
+        if (!isBreak && !isStraffing && playerRb.velocity != Vector2.zero)
         {
             playerTrail.emitting = true;
         }
@@ -284,6 +289,15 @@ public class PlayerMovementScript : MonoBehaviour
         canBreak = true;
 
         isStraffing = false;
+    }
+
+    private IEnumerator TurboAntiSpam()
+    {
+        canTurbo = false;
+
+        yield return new WaitForSecondsRealtime(turboCooldown);
+
+        canTurbo = true;
     }
 
 }
