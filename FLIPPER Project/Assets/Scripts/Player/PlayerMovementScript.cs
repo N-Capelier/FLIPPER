@@ -99,10 +99,10 @@ public class PlayerMovementScript : MonoBehaviour
 
         //Turbo
         isTurbo = Input.GetButton("AButton" + inputKey);
-        asReleaseTurbo = Input.GetButtonUp("AButton" + inputKey);
+        //asReleaseTurbo = Input.GetButtonUp("AButton" + inputKey);
 
-        if (asReleaseTurbo && canTurbo)
-            StartCoroutine(TurboAntiSpam());
+        //if (asReleaseTurbo && canTurbo)
+          //  StartCoroutine(TurboAntiSpam());
 
         if (isTurbo && canTurbo && turboFuel > 0 && !isBreak)
         {
@@ -291,13 +291,13 @@ public class PlayerMovementScript : MonoBehaviour
         isStraffing = false;
     }
 
-    private IEnumerator TurboAntiSpam()
+    /*private IEnumerator TurboAntiSpam()
     {
         canTurbo = false;
 
         yield return new WaitForSecondsRealtime(turboCooldown);
 
         canTurbo = true;
-    }
+    }*/
 
 }

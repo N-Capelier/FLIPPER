@@ -451,8 +451,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.014471948, y: 0.24521434}
-  m_Size: {x: 0.5002334, y: 0.92246556}
+  m_Offset: {x: -0.014472008, y: 0.24521446}
+  m_Size: {x: 0.53667796, y: 0.99535465}
   m_Direction: 0
 --- !u!114 &4286072834874210893
 MonoBehaviour:
@@ -472,6 +472,7 @@ MonoBehaviour:
   rotationSpeed: 8
   turboForce: 75
   turboStartForce: 6
+  turboCooldown: 0
   breakForce: 50
   breakLinearDrag: 5
   straffForce: 50
@@ -479,8 +480,8 @@ MonoBehaviour:
   straffMass: 4
   turboFuel: 100
   maxFuelValue: 100
-  fuelDecayTickSpeed: 0.1
-  fuelDecayValue: 0.5
+  fuelDecayTickSpeed: 0.05
+  fuelDecayValue: 2
   straffFuelCost: 10
   canMoveHorizontal: 1
   canTurbo: 1
@@ -489,6 +490,7 @@ MonoBehaviour:
   breakControlType: 0
   infiniteFuel: 1
   isTurbo: 0
+  asReleaseTurbo: 0
   isBreak: 0
   isStraffLeft: 0
   isStaffRight: 0

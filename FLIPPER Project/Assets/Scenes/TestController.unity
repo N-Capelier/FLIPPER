@@ -279,22 +279,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4286072834874210889, guid: b6c4747438ee2ca428d136d90166728e, type: 3}
-      propertyPath: m_Offset.x
-      value: -0.014472008
-      objectReference: {fileID: 0}
-    - target: {fileID: 4286072834874210889, guid: b6c4747438ee2ca428d136d90166728e, type: 3}
-      propertyPath: m_Size.x
-      value: 0.53667796
-      objectReference: {fileID: 0}
-    - target: {fileID: 4286072834874210889, guid: b6c4747438ee2ca428d136d90166728e, type: 3}
-      propertyPath: m_Offset.y
-      value: 0.24521446
-      objectReference: {fileID: 0}
-    - target: {fileID: 4286072834874210889, guid: b6c4747438ee2ca428d136d90166728e, type: 3}
-      propertyPath: m_Size.y
-      value: 0.99535465
-      objectReference: {fileID: 0}
     - target: {fileID: 4286072834874210890, guid: b6c4747438ee2ca428d136d90166728e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -337,18 +321,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4286072834874210890, guid: b6c4747438ee2ca428d136d90166728e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4286072834874210893, guid: b6c4747438ee2ca428d136d90166728e, type: 3}
-      propertyPath: fuelDecayValue
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4286072834874210893, guid: b6c4747438ee2ca428d136d90166728e, type: 3}
-      propertyPath: fuelDecayTickSpeed
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 4286072834874210893, guid: b6c4747438ee2ca428d136d90166728e, type: 3}
-      propertyPath: turboCooldown
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4286072834874210902, guid: b6c4747438ee2ca428d136d90166728e, type: 3}
