@@ -80,6 +80,11 @@ public class PlayerMovementScript : MonoBehaviour
 
         if (infiniteFuel && turboFuel <= 0)
             turboFuel = maxFuelValue;
+
+        if(transform.position.y <= -3.5)
+        {
+            Destroy(gameObject);
+        }
     }
 
     /// <summary>

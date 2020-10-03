@@ -23,6 +23,14 @@ public class ObstaclesBehaviour : MonoBehaviour
         obstacleRgb.velocity = new Vector2(0, fallSpeed * WorldManager.Instance.difficulty); 
     }
 
+    private void Update()
+    {
+        if (obstacleRgb.velocity.y != fallSpeed * WorldManager.Instance.difficulty)
+        {
+            obstacleRgb.velocity = new Vector2(0, fallSpeed * WorldManager.Instance.difficulty);
+        }
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.layer == worldLimitMask)

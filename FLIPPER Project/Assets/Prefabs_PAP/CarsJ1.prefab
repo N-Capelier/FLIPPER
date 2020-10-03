@@ -345,7 +345,7 @@ GameObject:
   - component: {fileID: 1724256699}
   m_Layer: 8
   m_Name: CarsJ1
-  m_TagString: Untagged
+  m_TagString: Car
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -406,7 +406,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f070b504f34f4c340855696691df93a8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fe0fc52b382bae9499594050632661c5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -451,7 +451,7 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.014472008, y: 0.24521446}
+  m_Offset: {x: -0.014472008, y: 0}
   m_Size: {x: 0.53667796, y: 0.99535465}
   m_Direction: 0
 --- !u!114 &4286072834874210893
