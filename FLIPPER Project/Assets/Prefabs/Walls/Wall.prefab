@@ -135,5 +135,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fallSpeed: -1
+  timeBeforeDestruction: 0.5
   generationPound: 1
   obstacleRgb: {fileID: 2302498886264876100}

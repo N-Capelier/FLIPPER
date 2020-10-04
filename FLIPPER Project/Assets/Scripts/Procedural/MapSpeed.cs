@@ -8,6 +8,6 @@ public class MapSpeed : MonoBehaviour
 
     void Update()
     {
-        mapAnimator.speed = WorldManager.Instance.difficulty;
+        mapAnimator.speed = WorldManager.Instance.difficulty * 0.75f + 0.25f;
     }
 }

@@ -66,7 +66,6 @@ public class WorldManager : Singleton<WorldManager>
     {
         if(difficultyTimer.onFinish)
         {
-            print("Difficulty UP !");
             difficulty *= difficultyMultiplicator;
             difficultyTimer.SetTime(difficultyUpStartingTime);
         }
