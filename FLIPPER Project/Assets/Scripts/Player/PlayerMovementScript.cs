@@ -19,6 +19,7 @@ public class PlayerMovementScript : MonoBehaviour
     private float timeSinceTurbo = 0f;
     [SerializeField] private float turboStartForce = 0f;
     [SerializeField] private float turboCooldown;
+    [SerializeField] private float turboOff;
 
     [Header("Break")]
     [SerializeField] private float breakForce = 10f;
@@ -294,6 +295,15 @@ public class PlayerMovementScript : MonoBehaviour
         canBreak = true;
 
         isStraffing = false;
+    }
+
+    public IEnumerator TurboOff()
+    {
+        canTurbo = false;
+
+        yield return new WaitForSeconds(turboOff);
+
+        canTurbo = true;
     }
 
     /*private IEnumerator TurboAntiSpam()

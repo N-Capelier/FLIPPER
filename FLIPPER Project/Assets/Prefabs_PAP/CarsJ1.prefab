@@ -473,6 +473,7 @@ MonoBehaviour:
   turboForce: 75
   turboStartForce: 6
   turboCooldown: 0
+  turboOff: 5
   breakForce: 50
   breakLinearDrag: 5
   straffForce: 50
