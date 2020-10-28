@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 377947239}
   - component: {fileID: 377947238}
   - component: {fileID: 377947237}
+  - component: {fileID: 377947240}
   m_Layer: 5
   m_Name: Start Button
   m_TagString: Untagged
@@ -204,7 +205,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 377947238}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 423917140}
+        m_TargetAssemblyTypeName: StartMenuManager, Assembly-CSharp
+        m_MethodName: StartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &377947238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,6 +256,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 377947235}
   m_CullTransparentMesh: 0
+--- !u!114 &377947240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 377947235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f311457f4aa3e7458692670532779ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonText: {fileID: 2096716991}
+  StartMenuEventSystem: {fileID: 1405750790}
+  animate: 1
+  animationScaleStep: 0.7
+  animationScaleLimMin: 1
+  animationScaleLimMax: 1.2
+  animationRotateStep: 0.9
+  animationRotateLimMin: -2
+  animationRotateLimMax: 2
 --- !u!1 &423917139
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,8 +289,9 @@ GameObject:
   - component: {fileID: 423917142}
   - component: {fileID: 423917141}
   - component: {fileID: 423917140}
+  - component: {fileID: 423917144}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Start Menu Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -271,14 +306,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 423917139}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Script: {fileID: 11500000, guid: 7478b5d2db79bf84a8c6fc490875badc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
+  mainMenuEventSystem: {fileID: 1405750790}
+  allMenuButton:
+  - {fileID: 377947240}
+  - {fileID: 472651706}
+  - {fileID: 1153276400}
+  - {fileID: 2139122436}
+  startAnimationTime: 1.8
 --- !u!114 &423917141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -348,6 +385,25 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 72.9, y: 41}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &423917144
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 423917139}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3357b617f55367e45a91177c3b18ca03, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &472651701
 GameObject:
   m_ObjectHideFlags: 0
@@ -360,13 +416,14 @@ GameObject:
   - component: {fileID: 472651705}
   - component: {fileID: 472651704}
   - component: {fileID: 472651703}
+  - component: {fileID: 472651706}
   m_Layer: 5
   m_Name: Settings Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &472651702
 RectTransform:
   m_ObjectHideFlags: 0
@@ -429,7 +486,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 472651704}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 423917140}
+        m_TargetAssemblyTypeName: StartMenuManager, Assembly-CSharp
+        m_MethodName: Settings
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &472651704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -468,6 +537,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 472651701}
   m_CullTransparentMesh: 0
+--- !u!114 &472651706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 472651701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f311457f4aa3e7458692670532779ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonText: {fileID: 984777768}
+  StartMenuEventSystem: {fileID: 1405750790}
+  animate: 1
+  animationScaleStep: 0.7
+  animationScaleLimMin: 1
+  animationScaleLimMax: 1.2
+  animationRotateStep: 0.9
+  animationRotateLimMin: -2
+  animationRotateLimMax: 2
 --- !u!1 &542164442
 GameObject:
   m_ObjectHideFlags: 0
@@ -898,13 +988,14 @@ GameObject:
   - component: {fileID: 1153276399}
   - component: {fileID: 1153276398}
   - component: {fileID: 1153276397}
+  - component: {fileID: 1153276400}
   m_Layer: 5
   m_Name: Credits Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1153276396
 RectTransform:
   m_ObjectHideFlags: 0
@@ -967,7 +1058,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1153276398}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 423917140}
+        m_TargetAssemblyTypeName: StartMenuManager, Assembly-CSharp
+        m_MethodName: Credits
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1153276398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1006,6 +1109,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1153276395}
   m_CullTransparentMesh: 0
+--- !u!114 &1153276400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1153276395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f311457f4aa3e7458692670532779ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonText: {fileID: 639321181}
+  StartMenuEventSystem: {fileID: 1405750790}
+  animate: 1
+  animationScaleStep: 0.7
+  animationScaleLimMin: 1
+  animationScaleLimMax: 1.2
+  animationRotateStep: 0.9
+  animationRotateLimMin: -2
+  animationRotateLimMax: 2
 --- !u!1 &1230537953
 GameObject:
   m_ObjectHideFlags: 0
@@ -1365,7 +1489,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1488877801}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1794,6 +1918,7 @@ GameObject:
   - component: {fileID: 2139122435}
   - component: {fileID: 2139122434}
   - component: {fileID: 2139122433}
+  - component: {fileID: 2139122436}
   m_Layer: 5
   m_Name: Quit Button
   m_TagString: Untagged
@@ -1863,7 +1988,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2139122434}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 423917140}
+        m_TargetAssemblyTypeName: StartMenuManager, Assembly-CSharp
+        m_MethodName: QuitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2139122434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1902,3 +2039,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2139122431}
   m_CullTransparentMesh: 0
+--- !u!114 &2139122436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2139122431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f311457f4aa3e7458692670532779ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonText: {fileID: 1401154348}
+  StartMenuEventSystem: {fileID: 1405750790}
+  animate: 1
+  animationScaleStep: 0.7
+  animationScaleLimMin: 1
+  animationScaleLimMax: 1.2
+  animationRotateStep: 0.9
+  animationRotateLimMin: -2
+  animationRotateLimMax: 2
